@@ -1,2 +1,2 @@
-# test-spring-graphql
-Test/template for graphql
+# test-tmpls
+Test projects and templates to feed the inner coding child
