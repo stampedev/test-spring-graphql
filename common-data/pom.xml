@@ -12,30 +12,19 @@
     </parent>
 
     <groupId>de.kopfgarn.tmpl</groupId>
-    <artifactId>test-spring-graphql</artifactId>
+    <artifactId>common-data</artifactId>
     <version>${revision}</version>
 
     <properties>
     </properties>
 
     <dependencies>
-        <!-- SELF -->
-        <dependency>
-            <groupId>de.kopfgarn.tmpl</groupId>
-            <artifactId>common-data</artifactId>
-            <version>${revision}</version>
-        </dependency>
-
         <!-- SPRING -->
+
+
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-graphql</artifactId>
-            <version>${version.spring-boot-starter-graphql}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
-            <version>${version.spring-boot-starter-web}</version>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
         </dependency>
     </dependencies>
 

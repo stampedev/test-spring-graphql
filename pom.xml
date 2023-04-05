@@ -22,6 +22,9 @@
         <version.spring-boot-starter>3.0.5</version.spring-boot-starter>
         <version.spring-boot-starter-graphql>${version.spring-boot-starter}</version.spring-boot-starter-graphql>
         <version.spring-boot-starter-web>${version.spring-boot-starter}</version.spring-boot-starter-web>
+
+        <!-- other 3rd party -->
+        <version.lombok>1.18.26</version.lombok>
     </properties>
 
     <dependencyManagement>
@@ -37,6 +40,16 @@
                 <artifactId>spring-boot-starter-web</artifactId>
                 <version>${version.spring-boot-starter-web}</version>
             </dependency>
+
+            <!-- Lombok -->
+            <!-- https://mvnrepository.com/artifact/org.projectlombok/lombok -->
+            <dependency>
+                <groupId>org.projectlombok</groupId>
+                <artifactId>lombok</artifactId>
+                <version>${version.lombok}</version>
+            </dependency>
+
+
         </dependencies>
     </dependencyManagement>
 
