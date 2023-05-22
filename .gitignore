@@ -3,6 +3,7 @@
 
 # Maven
 **/target/*
+**/.flattened-pom.xml
 
 # Idea
 **/*.iml
