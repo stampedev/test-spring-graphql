@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://maven.apache.org/POM/4.0.0"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
@@ -17,6 +17,7 @@
         <osmaven-plugin.version>1.7.1</osmaven-plugin.version>
         <protobuf-plugin.version>0.6.1</protobuf-plugin.version>
         <flatten-plugin.version>1.5.0</flatten-plugin.version>
+        <spring-boot-plugin.version>3.1.0</spring-boot-plugin.version>
 
         <!-- PLUGIN dependencies -->
         <protobuf-plugin.protoc.version>${protobuf.version}</protobuf-plugin.protoc.version>
@@ -31,12 +32,13 @@
         <version.spring-boot-starter>3.0.5</version.spring-boot-starter>
         <version.spring-boot-starter-graphql>${version.spring-boot-starter}</version.spring-boot-starter-graphql>
         <version.spring-boot-starter-web>${version.spring-boot-starter}</version.spring-boot-starter-web>
+        <version.spring-boot-starter-grpc>2.14.0.RELEASE</version.spring-boot-starter-grpc>
 
         <!-- other 3rd party -->
         <annotations.version>6.0.53</annotations.version>
         <version.lombok>1.18.26</version.lombok>
         <protobuf.version>3.23.1</protobuf.version>
-        <grpc.version>1.55.1</grpc.version>
+        <grpc.version>1.51.0</grpc.version>
     </properties>
 
     <dependencyManagement>
@@ -52,6 +54,16 @@
                 <artifactId>spring-boot-starter-web</artifactId>
                 <version>${version.spring-boot-starter-web}</version>
             </dependency>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter</artifactId>
+                <version>${version.spring-boot-starter}</version>
+            </dependency>
+            <dependency>
+                <groupId>net.devh</groupId>
+                <artifactId>grpc-server-spring-boot-starter</artifactId>
+                <version>${version.spring-boot-starter-grpc}</version>
+            </dependency>
 
             <!-- Lombok -->
             <!-- https://mvnrepository.com/artifact/org.projectlombok/lombok -->
@@ -61,7 +73,7 @@
                 <version>${version.lombok}</version>
             </dependency>
 
-            <!-- PROTOBUF -->
+            <!-- PROTOBUF & GRPC -->
             <dependency>
                 <groupId>com.google.protobuf</groupId>
                 <artifactId>protobuf-java</artifactId>
@@ -95,15 +107,17 @@
     </dependencyManagement>
 
     <build>
-            <extensions>
-                <extension>
-                    <groupId>kr.motd.maven</groupId>
-                    <artifactId>os-maven-plugin</artifactId>
-                    <version>${osmaven-plugin.version}</version>
-                </extension>
-            </extensions>
+        <extensions>
+            <!-- os detection etc -->
+            <extension>
+                <groupId>kr.motd.maven</groupId>
+                <artifactId>os-maven-plugin</artifactId>
+                <version>${osmaven-plugin.version}</version>
+            </extension>
+        </extensions>
         <pluginManagement>
             <plugins>
+                <!-- PROTOBUF -->
                 <plugin>
                     <groupId>org.xolstice.maven.plugins</groupId>
                     <artifactId>protobuf-maven-plugin</artifactId>
@@ -126,6 +140,7 @@
                         </execution>
                     </executions>
                 </plugin>
+                <!-- flatten for $revision -->
                 <plugin>
                     <groupId>org.codehaus.mojo</groupId>
                     <artifactId>flatten-maven-plugin</artifactId>
@@ -147,6 +162,18 @@
                             <phase>clean</phase>
                             <goals>
                                 <goal>clean</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
+                <plugin>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-maven-plugin</artifactId>
+                    <version>${spring-boot-plugin.version}</version>
+                    <executions>
+                        <execution>
+                            <goals>
+                                <goal>repackage</goal>
                             </goals>
                         </execution>
                     </executions>

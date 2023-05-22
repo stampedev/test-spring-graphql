@@ -1,0 +1,29 @@
+syntax = "proto3";
+option java_multiple_files = true;
+package de.kopfgarn.tmpl.proto;
+import "google/protobuf/timestamp.proto";
+
+
+message TestRequest {
+  string text = 1;
+
+}
+
+message TestResponse {
+  optional google.protobuf.Timestamp timestamp = 1;
+  string text = 2;
+}
+
+message TestException {
+  google.protobuf.Timestamp timestamp = 1;
+  TestErrorCode code = 2;
+}
+
+enum TestErrorCode {
+  UNEXPECTED = 0;
+  BAD_REQUEST = 400;
+}
+
+service TestService {
+  rpc test(TestRequest) returns (TestResponse);
+}

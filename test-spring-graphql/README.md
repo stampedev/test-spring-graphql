@@ -2,3 +2,6 @@
 Test/template for graphql
 
 - enhanced / taylored version of https://www.baeldung.com/spring-graphql
+
+## TODO
+- actually implement stuff
